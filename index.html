@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Games</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            background: #171717;
+            font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+            color: #FFFFFF;
+            margin: 0;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 26px 4vw 14px 4vw;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .logo img {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: #262626;
+        }
+        .site-name {
+            font-size: 1.6rem;
+            font-weight: bold;
+            letter-spacing: 1.7px;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+        nav a {
+            color: #FFD95A;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        nav a:not(.active) {
+            color: #fff;
+            opacity: 0.78;
+        }
+        nav a:hover {
+            color: #FFD95A;
+            text-shadow: 0 0 7px #ffd95a96;
+        }
+        .search-bar {
+            margin-left: 22px;
+            position: relative;
+        }
+        .search-bar input {
+            background: #212121;
+            border: 1px solid #393939;
+            color: #eee;
+            border-radius: 7px;
+            padding: 8px 30px 8px 14px;
+            font-size: 1rem;
+            width: 180px;
+        }
+        .search-bar svg {
+            position: absolute;
+            right: 9px;
+            top: 8px;
+            width: 18px;
+            height: 18px;
+            fill: #B3B3B3;
+        }
+        main {
+            padding: 18px 4vw 0 4vw;
+            min-height: 80vh;
+        }
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+            margin-top: 26px;
+        }
+        .game-card {
+            background: #222222;
+            border-radius: 22px;
+            box-shadow: 0px 7px 32px #00000050;
+            overflow: hidden;
+            transition: transform 0.16s;
+            cursor: pointer;
+        }
+        .game-card:hover {
+            transform: scale(1.038) translateY(-5px);
+            box-shadow: 0px 13px 40px #00000060;
+        }
+        .game-img {
+            display: block;
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            background: #303030;
+        }
+        .game-title {
+            font-size: 1.18rem;
+            color: #fff;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            padding: 16px 18px 18px 18px;
+            background: linear-gradient(0deg, #1e1e1e 80%, #222222 100%);
+        }
+        .modal-bg {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.82);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        .modal-bg.active {
+            display: flex;
+        }
+        .modal-content {
+            position: relative;
+            background: #222222;
+            border-radius: 24px;
+            width: 90vw;
+            max-width: 760px;
+            height: 70vh;
+            box-shadow: 0 10px 40px #00000090;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            overflow: hidden;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 11px 17px;
+            background: #202020;
+        }
+        .modal-header button {
+            background: none;
+            border: none;
+            color: #FFD95A;
+            font-size: 1.35rem;
+            margin-left: 18px;
+            cursor: pointer;
+        }
+        .modal-header .fullscreen-btn {
+            font-size: 1.15rem;
+        }
+        .modal-iframe-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #212121;
+        }
+        .modal-iframe-container iframe {
+            width: 98%;
+            height: 98%;
+            border: none;
+            border-radius: 14px;
+            background: #181818;
+        }
+        @media (max-width: 700px) {
+            header, main {
+                padding: 18px 2vw;
+            }
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 19px;
+            }
+            .modal-content {
+                width: 97vw;
+                height: 60vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://cdn-icons-png.flaticon.com/512/272/272528.png" alt="Game Icon">
+            <span class="site-name">Games</span>
+        </div>
+        <nav>
+            <a href="#" class="active">Home</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for...">
+                <svg viewBox="0 0 24 24"><path d="M21.71 20.29l-3.388-3.388a9 9 0 1 0-1.42 1.42l3.388 3.388a1 1 0 0 0 1.42-1.42ZM11 19a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8Z"></path></svg>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="games-grid">
+            <div class="game-card" data-gameurl=https://crazy-cattle.co/game/crazy-cattle/">
+                <img class="game-img" src="https://crazy-cattle.co/game/crazy-cattle/index.png" alt="Crazy Cattle 3D">
+                <div class="game-title">Crazy Cattle 3D</div>
+            </div>
+            <div class="game-card" data-gameurl="https://tetris.com/play-tetris">
+                <img class="game-img" src="https://raw.githubusercontent.com/classroom-games/images/main/geometry-dash-lite.jpg" alt="Geometry Dash Lite">
+                <div class="game-title">Geometry Dash Lite</div>
+            </div>
+            <div class="game-card" data-gameurl="https://play2048.co/">
+                <img class="game-img" src="https://raw.githubusercontent.com/classroom-games/images/main/run3.jpg" alt="Run 3">
+                <div class="game-title">Run 3</div>
+            </div>
+            <div class="game-card" data-gameurl="https://www.solitr.com/">
+                <img class="game-img" src="https://raw.githubusercontent.com/classroom-games/images/main/run2.jpg" alt="Run 2">
+                <div class="game-title">Run 2</div>
+            </div>
+        </div>
+    </main>
+    <div class="modal-bg" id="modalBg">
+        <div class="modal-content" id="modalContent">
+            <div class="modal-header">
+                <button class="fullscreen-btn" id="fullscreenBtn" title="Fullscreen">&#x26F6;</button>
+                <button class="close-btn" id="closeBtn" title="Close">&times;</button>
+            </div>
+            <div class="modal-iframe-container">
+                <iframe src="" id="gameIframe" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <footer>
+        &copy; 2025 Games &mdash; All rights reserved.
+    </footer>
+    <script>
+        // Open modal with game
+        document.querySelectorAll('.game-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.getElementById('modalBg').classList.add('active');
+                document.getElementById('gameIframe').src = card.getAttribute('data-gameurl');
+            });
+        });
+
+        // Close modal function
+        function closeModal() {
+            document.getElementById('modalBg').classList.remove('active');
+            document.getElementById('gameIframe').src = '';
+        }
+
+        // Fullscreen function
+        document.getElementById('fullscreenBtn').onclick = () => {
+            let iframe = document.getElementById('gameIframe');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.mozRequestFullScreen) {
+                iframe.mozRequestFullScreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
+        };
+
+        // Handle X button
+        document.getElementById('closeBtn').onclick = closeModal;
+
+        // Clicking OUTSIDE modal
+        document.getElementById('modalBg').addEventListener('mousedown', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // ESC key closes modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>
